@@ -1,7 +1,71 @@
 #include <iostream>
-
+#include <fstream> // untuk memasukan nama yang ada ketika kita mendaftar
+#include <string>
+#include <vector> // library struktur data dinamis agar lebih efesien
+#include <limits> // untuk manipulasi data input
 using namespace std;
 
-int main (){
-return 0;
+// Fungsi untuk mendaftarkan user baru
+void registerUser()
+{
+    string username, password;
+    cout << "Username: ";
+    cin >> username;
+    cout << "Password: ";
+    cin >> password;
+
+    ofstream file("userid.txt", ios::app); // untuk memastikan data baru tanpa menghapus yang lain // membuka file userid.txt
+    if (file.is_open())                    // jika file userid.txt kebuka maka akan di jalankan code di bawah
+    {
+        file << username << " " << password << endl;
+        file.close();
+        cout << "Pendaftaran berhasil!" << endl;
+    }
+    else // jika filenya error
+    {
+        cout << "Gagal membuka file!" << endl;
+    }
+}
+
+bool loginUser() // fungsi untuk login usernya
+{
+    string username, password;
+    cout << "\nLogin" << endl;
+    cout << "Username: ";
+    cin >> username;
+    cout << "Password: ";
+    cin >> password;
+
+    ifstream file("userid.txt"); // membaca file userid.txt apakah ada data pengguna di dalamnya
+    string fileUser, filePass;
+    bool ditemukan = false; // menandai jika file ini berhasil atau tidak
+
+    if (file.is_open()) // jika file userid.txt di buka maka
+    {
+        while (file >> fileUser >> filePass) // membaca file baris demi baris dipisah menjadi fileuser dan filepass
+        {
+            if (fileUser == username && filePass == password) // jika dalam file userid.txt cocok atau true maka login berhasil
+            {
+                ditemukan = true;
+                break;
+            }
+        }
+        file.close(); // menutup file userid.txt
+
+        if (ditemukan) // jika ditemukan user dan password maka
+        {
+            cout << "Login berhasil! Selamat datang user: " << username << "!" << endl;
+            return true;
+        }
+        else // jika user dan password tidak di temukan maka
+        {
+            cout << "Login gagal. Username atau password salah." << endl;
+            return false;
+        }
+    }
+    else // jika file gagal di buka
+    {
+        cout << "Gagal membuka file!" << endl;
+        return false;
+    }
 }
