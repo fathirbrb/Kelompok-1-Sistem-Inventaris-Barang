@@ -69,3 +69,25 @@ bool loginUser() // fungsi untuk login usernya
         return false;
     }
 }
+class Barang // mewakili satu barang
+{
+public: // dibuat public dan memiliki atribut
+    int id;
+    string nama;
+    int jumlah;
+
+    Barang(int id, string nama, int jumlah) // konstruktor untuk membuat objek barang
+    {
+        this->id = id; // this-> untuk membedakan antara parameter dan atribut class
+        this->nama = nama;
+        this->jumlah = jumlah;
+    }
+
+    void tampilkan() const // menampilkan semua barang dan tidak boleh mengubah data apapun
+    {
+        cout << "ID     : " << id << endl;
+        cout << "Nama   : " << nama << endl;
+        cout << "Jumlah : " << jumlah << endl;
+        cout << "---------------------\n";
+    }
+};
