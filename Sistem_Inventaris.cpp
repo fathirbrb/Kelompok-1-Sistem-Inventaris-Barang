@@ -160,3 +160,69 @@ void cariBarang() const // metode untuk mencari barang sesuai id yg telah di mas
         }
     }
 };
+
+int main()
+{
+    int pilihan;
+    bool jalan = true; // menandakan program masih berjalan
+
+    while (jalan)
+    {
+        cout << "\n|MENU UTAMA|" << endl;
+        cout << "1. Daftar\n2. Login\n3. Keluar\nPilih: ";
+        cin >> pilihan;
+
+        if (pilihan == 1)
+        {
+            registerUser(); // panggil fungsi daftar
+        }
+        else if (pilihan == 2)
+        {
+            bool sukses = loginUser(); // panggil fungsi login
+            if (sukses)
+            {
+                Inventaris inventaris; // membuat objek bernama inventaris
+                do
+                {
+                    cout << "\n|MENU INVENTARIS BARANG|\n";
+                    cout << "1. Tambah Barang\n";
+                    cout << "2. Cari Barang\n";
+                    cout << "3. Tampilkan Semua Barang\n";
+                    cout << "4. Keluar\n";
+                    cout << "Pilih: ";
+                    cin >> pilihan;
+
+                    switch (pilihan)
+                    {
+                    case 1:
+                        inventaris.tambahBarang(); // tambahkan barang baru
+                        break;
+                    case 2:
+                        inventaris.cariBarang(); // mencari barang berdasarkan ID barang
+                        break;
+                    case 3:
+                        inventaris.tampilkanSemua(); // menampilkan semua barang
+                        break;
+                    case 4:
+                        cout << "Keluar dari program.\n";
+                        break;
+                    default:
+                        cout << "Pilihan tidak valid.\n";
+                    }
+                } while (pilihan != 4); // mengulangi sampai pilihan keluar
+                jalan = false; // keluar dari menu utama
+            }
+        }
+        else if (pilihan == 3)
+        {
+            cout << "Terimakasih telah menggunakan program kami, Semoga datang kembali :)" << endl;
+            jalan = false;
+        }
+        else
+        {
+            cout << "Pilihan tidak valid, Silahkan Coba lagi." << endl;
+        }
+    }
+
+    return 0;
+}
