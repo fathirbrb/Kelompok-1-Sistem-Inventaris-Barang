@@ -127,3 +127,36 @@ public: // metode untuk menambahkan atau memasukan barang baru
         daftar.push_back(b);// membuat penyimpanan barang
         cout << "Barang berhasil ditambahkan.\n";
     }
+void cariBarang() const // metode untuk mencari barang sesuai id yg telah di masukkan
+    {
+        int id;
+        cout << "\nMasukkan ID barang yang ingin dicari: ";
+        cin >> id;
+
+        for (const auto &b : daftar) // looping semua barang
+        {
+            if (b.id == id)
+            {
+                cout << "\nBarang ditemukan!\n";
+                b.tampilkan(); // menampilkan barang
+                return;
+            }
+        }
+        cout << "Barang dengan ID " << id << " tidak ditemukan.\n";
+    }
+
+    void tampilkanSemua() const // metode untuk menampilkan semua barang
+    {
+        cout << "\n|Daftar Barang|\n";
+        if (daftar.empty())
+        {
+            cout << "Belum ada barang.\n";
+            return;
+        }
+
+        for (const auto &b : daftar)
+        {
+            b.tampilkan(); // menampilkan barang
+        }
+    }
+};
