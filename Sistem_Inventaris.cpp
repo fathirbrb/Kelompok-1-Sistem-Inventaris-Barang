@@ -91,3 +91,39 @@ public: // dibuat public dan memiliki atribut
         cout << "---------------------\n";
     }
 };
+
+class Inventaris // anggapannya database kecil
+{
+private:
+    vector<Barang> daftar; // menyimpan barang secara dinamis atau terurut dan dideklarasikan private agar tidak bisa di akses di luar kelas
+
+public: // metode untuk menambahkan atau memasukan barang baru
+    void tambahBarang()
+    {
+        int id, jumlah;
+        string nama;
+
+        cout << "\nMasukkan ID barang (berupa angka)   : ";
+        while (!(cin >> id))
+        {
+            cout << "Input tidak valid. Masukkan angka: "; 
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } // digunakan untuk membersihkan kesalahan input.
+
+        cout << "Masukkan nama barang : ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, nama);
+
+        cout << "Masukkan jumlah      : ";
+        while (!(cin >> jumlah))
+        {
+            cout << "Input tidak valid. Masukkan angka: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        Barang b(id, nama, jumlah);
+        daftar.push_back(b);// membuat penyimpanan barang
+        cout << "Barang berhasil ditambahkan.\n";
+    }
